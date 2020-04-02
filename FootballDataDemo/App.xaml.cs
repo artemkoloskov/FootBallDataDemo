@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballDataDemo.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,12 @@ namespace FootballDataDemo
     /// </summary>
     public partial class App : Application
     {
+        public App ()
+        {
+            using (AppDbContext db = new AppDbContext())
+            {
+                db.Database.Migrate();
+            }
+        }
     }
 }

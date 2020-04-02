@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FootballDataDemo.Data;
+using FootballDataDemo.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,25 @@ namespace FootballDataDemo
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded (object sender, RoutedEventArgs e)
+        {
+            using (var db = new AppDbContext())
+            {
+                playerList.ItemsSource = db.Players.ToList();
+            }
+        }
+
+        private void addBtn_Click (object sender, RoutedEventArgs e)
+        {
+            using (var db = new AppDbContext())
+            {
+                Player player = new Player { Name = nametxt.Text };
+                db.Players.Add(player);
+                db.SaveChanges();
+                playerList.ItemsSource = db.Players.ToList();
+            }
         }
     }
 }

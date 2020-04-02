@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballDataDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Page_Loaded">
     <Grid>
-        
+        <StackPanel>
+            <TextBox Name="nametxt"></TextBox>
+            <Button Content="Добавить" Name="addBtn" Click="addBtn_Click"></Button>
+            <ListView Name="playerList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Name="playerNameList" Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>
