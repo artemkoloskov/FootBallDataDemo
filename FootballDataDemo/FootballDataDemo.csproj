@@ -182,9 +182,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20200402093423_first.cs" />
-    <Compile Include="Migrations\20200402093423_first.designer.cs">
-      <DependentUpon>20200402093423_first.cs</DependentUpon>
+    <Compile Include="Migrations\20200403045616_first.cs" />
+    <Compile Include="Migrations\20200403045616_first.designer.cs">
+      <DependentUpon>20200403045616_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
     <Compile Include="Model\Defence.cs" />

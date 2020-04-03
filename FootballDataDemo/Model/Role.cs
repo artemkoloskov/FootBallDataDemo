@@ -21,7 +21,7 @@ namespace FootballDataDemo.Model
     /// <summary>
     /// Класс роли игрока
     /// </summary>
-    class Role
+    public class Role
     {
         public int Id { get; set; }
         public RoleType RoleType { get; set; }

@@ -9,7 +9,7 @@ namespace FootballDataDemo.Model
     /// <summary>
     /// Класс "защиты ворот"
     /// </summary>
-    class Defence
+    public class Defence
     {
         public int Id { get; set; }
         public Match Match { get; set; }
@@ -17,7 +17,7 @@ namespace FootballDataDemo.Model
         public Team AttemptingTeam { get; set; }
         public Player Goalkeeper { get; set; }
         public Player AttemtingPlayer { get; set; }
-        public TimeSpan DefenceTime { get; set; }
+        public int DefenceTime { get; set; } // Время прошедшее с начала матча, в секундах
 
         public Defence ()
         {

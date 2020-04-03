@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FootballDataDemo.Migrations
 {
@@ -98,7 +97,7 @@ namespace FootballDataDemo.Migrations
                     AttemptingTeamId = table.Column<int>(nullable: true),
                     GoalkeeperId = table.Column<int>(nullable: true),
                     AttemtingPlayerId = table.Column<int>(nullable: true),
-                    DefenceTime = table.Column<TimeSpan>(nullable: false)
+                    DefenceTime = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,7 +144,7 @@ namespace FootballDataDemo.Migrations
                     PassingTeamId = table.Column<int>(nullable: true),
                     PassingPlayerId = table.Column<int>(nullable: true),
                     RecievingPlayerId = table.Column<int>(nullable: true),
-                    PassTime = table.Column<TimeSpan>(nullable: false)
+                    PassTime = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,7 +186,7 @@ namespace FootballDataDemo.Migrations
                     ConcedingTeamId = table.Column<int>(nullable: true),
                     ScoringPlayerId = table.Column<int>(nullable: true),
                     GoalkeeperId = table.Column<int>(nullable: true),
-                    GoalTime = table.Column<TimeSpan>(nullable: false)
+                    GoalTime = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,7 +234,7 @@ namespace FootballDataDemo.Migrations
                     TackledTeamId = table.Column<int>(nullable: true),
                     TacklingPlayerId = table.Column<int>(nullable: true),
                     TackledPlayerId = table.Column<int>(nullable: true),
-                    TackleTime = table.Column<TimeSpan>(nullable: false)
+                    TackleTime = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

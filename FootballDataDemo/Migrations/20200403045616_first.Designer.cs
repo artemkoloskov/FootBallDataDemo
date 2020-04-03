@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballDataDemo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200402093423_first")]
+    [Migration("20200403045616_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,8 @@ namespace FootballDataDemo.Migrations
                     b.Property<int?>("AttemtingPlayerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<TimeSpan>("DefenceTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DefenceTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("DefendingTeamId")
                         .HasColumnType("INTEGER");
@@ -66,8 +66,8 @@ namespace FootballDataDemo.Migrations
                     b.Property<int?>("ConcedingTeamId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<TimeSpan>("GoalTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("GoalTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("GoalkeeperId")
                         .HasColumnType("INTEGER");
@@ -105,8 +105,8 @@ namespace FootballDataDemo.Migrations
                     b.Property<int?>("MatchId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<TimeSpan>("PassTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PassTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("PassingPlayerId")
                         .HasColumnType("INTEGER");
@@ -198,8 +198,8 @@ namespace FootballDataDemo.Migrations
                     b.Property<int?>("MatchId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<TimeSpan>("TackleTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TackleTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("TackledPlayerId")
                         .HasColumnType("INTEGER");

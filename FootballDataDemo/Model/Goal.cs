@@ -9,7 +9,7 @@ namespace FootballDataDemo.Model
     /// <summary>
     /// Класс "гола"
     /// </summary>
-    class Goal
+    public class Goal
     {
         public int Id { get; set; }
         public Match Match { get; set; }
@@ -17,7 +17,7 @@ namespace FootballDataDemo.Model
         public Team ConcedingTeam { get; set; }
         public Player ScoringPlayer { get; set; }
         public Player Goalkeeper { get; set; }
-        public TimeSpan GoalTime { get; set; }
+        public int GoalTime { get; set; } // Время прошедшее с начала матча, в секундах
 
         public Goal ()
         {

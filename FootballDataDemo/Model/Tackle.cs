@@ -9,7 +9,7 @@ namespace FootballDataDemo.Model
     /// <summary>
     /// Класс "отбора"
     /// </summary>
-    class Tackle
+    public class Tackle
     {
         public int Id { get; set; }
         public Match Match { get; set; }
@@ -17,7 +17,7 @@ namespace FootballDataDemo.Model
         public Team TackledTeam { get; set; }
         public Player TacklingPlayer { get; set; }
         public Player TackledPlayer { get; set; }
-        public TimeSpan TackleTime { get; set; }
+        public int TackleTime { get; set; } // Время прошедшее с начала матча, в секундах
 
         public Tackle ()
         {

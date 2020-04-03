@@ -5,19 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballDataDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="550" Width="800"
         Loaded="Page_Loaded">
     <Grid>
-        <StackPanel>
-            <TextBox Name="nametxt"></TextBox>
-            <Button Content="Добавить" Name="addBtn" Click="addBtn_Click"></Button>
-            <ListView Name="playerList">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Name="playerNameList" Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="teamsLabel" Content="Команды" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+
+        <DataGrid x:Name="teamsDataGrid" HorizontalAlignment="Left" Height="160" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Название" Width="120*"/>
+                <DataGridTextColumn Binding="{Binding Abbreviation}" Header="Скр. нзв." Width="60*"/>
+                <DataGridTextColumn Binding="{Binding TeamStats}" Header="Статистика по игрокам" Width="150*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label x:Name="matchesLabel" Content="Матчи" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" FontSize="18"/>
+        
+        <DataGrid x:Name="matchesDataGrid" HorizontalAlignment="Left" Height="160" Margin="10,248,0,0" VerticalAlignment="Top" Width="774">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding MatchTitleLong}" Header="Команды участники" Width="120*"/>
+                <DataGridTextColumn Binding="{Binding MatchResults}" Header="Результат матча" Width="150*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
