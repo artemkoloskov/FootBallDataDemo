@@ -12,9 +12,8 @@ namespace FootballDataDemo.Model
         public string Name { get; set; }
         public string Abbreviation { get; set; }
 
-        public ICollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Players { get; set; }
 
-        [NotMapped]
         /// <summary>
         /// Данные по составу команд в читаемой форме
         /// </summary>
@@ -22,6 +21,11 @@ namespace FootballDataDemo.Model
         {
             get 
             {
+                if (Players == null)
+                {
+                    return "";
+                }
+
                 string stats = "";
                 
                 int goalkeepersNum = 0;
@@ -53,6 +57,8 @@ namespace FootballDataDemo.Model
                 return stats;
             }
         }
+
+        public string LongName => Name + " (" + Abbreviation + ")";
 
         public Team ()
         {

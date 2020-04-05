@@ -12,11 +12,12 @@ namespace FootballDataDemo.Model
     public class GoalPass
     {
         public int Id { get; set; }
-        public Match Match { get; set; }
-        public Team PassingTeam { get; set; }
-        public Player PassingPlayer { get; set; }
-        public Player RecievingPlayer { get; set; }
         public int PassTime { get; set; } // Время прошедшее с начала матча, в секундах
+
+        public virtual Match Match { get; set; }
+        public virtual Team PassingTeam { get; set; }
+        public virtual Player PassingPlayer { get; set; }
+        public virtual Player RecievingPlayer { get; set; }
 
         public GoalPass ()
         {

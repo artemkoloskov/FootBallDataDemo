@@ -12,51 +12,41 @@ namespace FootballDataDemo.Model
     /// </summary>
     public class Match
     {
-
         public int Id { get; set; }
-        public Team Team1 { get; set; }
-        public Team Team2 { get; set; }
 
-        public ICollection<Goal> Goals { get; set; }
-        public ICollection<GoalPass> GoalPasses { get; set; }
-        public ICollection<Tackle> Tackles { get; set; }
-        public ICollection<Defence> Defences { get; set; }
+        public virtual Team Team1 { get; set; }
+        public virtual Team Team2 { get; set; }
 
-        [NotMapped]
+        public virtual ICollection<Goal> Goals { get; set; }
+        public virtual ICollection<GoalPass> GoalPasses { get; set; }
+        public virtual ICollection<Tackle> Tackles { get; set; }
+        public virtual ICollection<Defence> Defences { get; set; }
+
         /// <summary>
         /// Название матча по названиям команд в длинной форме
         /// </summary>
-        public string MatchTitleLong
-        {
-            get
-            {
-                string title = Team1.Name + " (" + Team1.Abbreviation +
-                    ") - " + Team2.Name + " (" + Team2.Abbreviation + ")";
+        public string TitleLong => Team1 == null || Team2 == null ? "" :
+                    Team1.Name + " (" + Team1.Abbreviation + ") - " +
+                    Team2.Name + " (" + Team2.Abbreviation + ")";
 
-                return title;
-            }
-        }
-        
         /// <summary>
         /// Название матча по аббревиатурам команд в короткой форме
         /// </summary>
-        public string MatchTitleShort
-        {
-            get
-            {
-                string title = Team1.Abbreviation + " - " + Team2.Abbreviation;
-
-                return title;
-            }
-        }
+        public string TitleShort => Team1 == null || Team2 == null ? "" :
+                    Team1.Abbreviation + " - " + Team2.Abbreviation;
     
         /// <summary>
         /// Результаты матча в читаемой форме
         /// </summary>
-        public string MatchResults
+        public string Results
         {
             get
             {
+                if (Goals == null)
+                {
+                    return "";
+                }
+
                 string results = "";
 
                 int team1Score = 0;

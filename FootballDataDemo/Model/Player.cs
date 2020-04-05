@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,21 @@ namespace FootballDataDemo.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Role Role { get; set; }
-        public Team Team { get; set; }
+        public int Number { get; set; }
+
+        public virtual Role Role { get; set; }
+        public virtual Team Team { get; set; }
+
+        [NotMapped]
+        public int GoalsNum { get; set; } = 0;
+        [NotMapped]
+        public int DefencesNum { get; set; } = 0;
+        [NotMapped]
+        public int TacklesNum { get; set; } = 0;
+        [NotMapped]
+        public int GoalPassesNum { get; set; } = 0;
+
+        public string RoleTitle => Role == null ? "" : Role.Title;
 
         public Player ()
         {

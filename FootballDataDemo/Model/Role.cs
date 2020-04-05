@@ -24,9 +24,9 @@ namespace FootballDataDemo.Model
     public class Role
     {
         public int Id { get; set; }
-        public RoleType RoleType { get; set; }
+
+        public virtual RoleType RoleType { get; set; }
         
-        [NotMapped]
         /// <summary>
         /// Перевод нумератора типов ролей в читаемую форму для пользователя
         /// </summary>

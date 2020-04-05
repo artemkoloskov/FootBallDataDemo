@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballDataDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800"
-        Loaded="Page_Loaded">
+        Title="MainWindow" Height="570" Width="800"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,21 +14,29 @@
 
         <Label x:Name="teamsLabel" Content="Команды" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
 
-        <DataGrid x:Name="teamsDataGrid" HorizontalAlignment="Left" Height="160" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
+        <DataGrid x:Name="teamsDataGrid" MouseDoubleClick="TeamsDataGrid_MouseDoubleClick" HorizontalAlignment="Left" Height="160" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Название" Width="120*"/>
-                <DataGridTextColumn Binding="{Binding Abbreviation}" Header="Скр. нзв." Width="60*"/>
-                <DataGridTextColumn Binding="{Binding TeamStats}" Header="Статистика по игрокам" Width="150*"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}" Header="Название" Width="120*"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Abbreviation}" Header="Скр. нзв." Width="60*"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding TeamStats}" Header="Статистика по игрокам" Width="150*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label x:Name="matchesLabel" Content="Матчи" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="openTeamDetailsButton" Content="Просмотреть&#xD;&#xA;детали команды" HorizontalAlignment="Left" Click="OpenTeamDetailsButton_Click" Margin="10,220,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+        <Button x:Name="createNewTeamButton" Content="Создать&#xD;&#xA;новую команду" HorizontalAlignment="Left" Click="CreateNewTeamButton_Click" Margin="128,220,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+        <Button x:Name="deleteTeamButton" Content="Удалить&#xD;&#xA;выбр. команду" HorizontalAlignment="Left" Click="DeleteTeamButton_Click" Margin="246,220,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
         
-        <DataGrid x:Name="matchesDataGrid" HorizontalAlignment="Left" Height="160" Margin="10,248,0,0" VerticalAlignment="Top" Width="774">
+        <Label x:Name="matchesLabel" Content="Матчи" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" FontSize="18"/>
+        
+        <DataGrid x:Name="matchesDataGrid" MouseDoubleClick="MatchesDataGrid_MouseDoubleClick" HorizontalAlignment="Left" Height="160" Margin="10,306,0,0" VerticalAlignment="Top" Width="774">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding MatchTitleLong}" Header="Команды участники" Width="120*"/>
-                <DataGridTextColumn Binding="{Binding MatchResults}" Header="Результат матча" Width="150*"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding TitleLong}" Header="Команды участники" Width="120*"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Results}" Header="Результат матча" Width="150*"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button x:Name="openMatchDetailsButton" Content="Просмотреть&#xD;&#xA;детали матча" HorizontalAlignment="Left" Click="OpenMatchDetailsButton_Click" Margin="10,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+        <Button x:Name="createNewMatchButton" Content="Создать&#xD;&#xA;новый матч" HorizontalAlignment="Left" Click="CreateNewMatchButton_Click" Margin="128,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+        <Button x:Name="deleteMatchButton" Content="Удалить&#xD;&#xA;выбранный матч" HorizontalAlignment="Left" Click="DeleteMatchButton_Click" Margin="246,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
     </Grid>
 </Window>

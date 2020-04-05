@@ -12,12 +12,13 @@ namespace FootballDataDemo.Model
     public class Goal
     {
         public int Id { get; set; }
-        public Match Match { get; set; }
-        public Team ScoringTeam { get; set; }
-        public Team ConcedingTeam { get; set; }
-        public Player ScoringPlayer { get; set; }
-        public Player Goalkeeper { get; set; }
         public int GoalTime { get; set; } // Время прошедшее с начала матча, в секундах
+
+        public virtual Match Match { get; set; }
+        public virtual Team ScoringTeam { get; set; }
+        public virtual Team ConcedingTeam { get; set; }
+        public virtual Player ScoringPlayer { get; set; }
+        public virtual Player Goalkeeper { get; set; }
 
         public Goal ()
         {

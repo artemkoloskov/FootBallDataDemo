@@ -1,0 +1,43 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FootballDataDemo"
+        xmlns:Model="clr-namespace:FootballDataDemo.Model" x:Class="FootballDataDemo.CreateNewTeamForm"
+        mc:Ignorable="d"
+        Title="CreateNewTeamForm" Height="202.956" Width="374.324">
+    <Window.Resources>
+        <CollectionViewSource x:Key="teamViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Team}, CreateList=True}"/>
+        <CollectionViewSource x:Key="teamPlayersViewSource" Source="{Binding Players, Source={StaticResource teamViewSource}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource teamPlayersViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="763*"/>
+            <ColumnDefinition Width="32*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="grid2" DataContext="{StaticResource teamViewSource}" HorizontalAlignment="Left" Margin="112,28,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Название:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid1" DataContext="{StaticResource teamViewSource}" HorizontalAlignment="Left" Margin="41,65,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Сокращение названия:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="abbreviationTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Abbreviation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Button x:Name="createNewTeamButton" Content="Сохранить" HorizontalAlignment="Left" Click="CreateNewTeamButton_Click" Margin="10,120,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+    </Grid>
+</Window>

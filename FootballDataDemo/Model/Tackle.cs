@@ -12,12 +12,13 @@ namespace FootballDataDemo.Model
     public class Tackle
     {
         public int Id { get; set; }
-        public Match Match { get; set; }
-        public Team TacklingTeam { get; set; }
-        public Team TackledTeam { get; set; }
-        public Player TacklingPlayer { get; set; }
-        public Player TackledPlayer { get; set; }
         public int TackleTime { get; set; } // Время прошедшее с начала матча, в секундах
+
+        public virtual Match Match { get; set; }
+        public virtual Team TacklingTeam { get; set; }
+        public virtual Team TackledTeam { get; set; }
+        public virtual Player TacklingPlayer { get; set; }
+        public virtual Player TackledPlayer { get; set; }
 
         public Tackle ()
         {

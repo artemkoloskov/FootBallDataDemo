@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using FootballDataDemo.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 
 namespace FootballDataDemo.Data
 {
     class AppDbContext : DbContext
     {
+        public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
         public DbSet<Player> Players { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Match> Matches { get; set; }
@@ -21,9 +25,8 @@ namespace FootballDataDemo.Data
 
         protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=FootballDataDemo.db");
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlite("Data Source=FootballDataDemo.db");
             base.OnConfiguring(optionsBuilder);
         }
-        
     }
 }
