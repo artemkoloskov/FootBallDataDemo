@@ -28,6 +28,7 @@ namespace FootballDataDemo.Model
         [NotMapped]
         public int GoalPassesNum { get; set; } = 0;
 
+        // Для столбцов таблиц
         public string RoleTitle => Role == null ? "" : Role.Title;
 
         public Player ()

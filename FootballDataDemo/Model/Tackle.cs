@@ -20,6 +20,12 @@ namespace FootballDataDemo.Model
         public virtual Player TacklingPlayer { get; set; }
         public virtual Player TackledPlayer { get; set; }
 
+        // Для столбцов таблиц
+        public string TacklingTeamName => TacklingTeam.Name;
+        public string TackledTeamName => TackledTeam.Name;
+        public string TacklingPlayerName => TacklingPlayer.Name;
+        public string TackledPlayerName => TackledPlayer.Name;
+
         public Tackle ()
         {
 

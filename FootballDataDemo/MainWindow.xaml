@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballDataDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="570" Width="800"
+        Title="MainWindow" Height="767" Width="800"
         >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -13,6 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <Label x:Name="teamsLabel" Content="Команды" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="updateButton" Content="Обновить" HorizontalAlignment="Left" Click="UpdateButton_Click" Margin="120,20,0,0" VerticalAlignment="Top" Width="65" Height="18"/>
 
         <DataGrid x:Name="teamsDataGrid" MouseDoubleClick="TeamsDataGrid_MouseDoubleClick" HorizontalAlignment="Left" Height="160" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
             <DataGrid.Columns>
@@ -27,6 +28,7 @@
         <Button x:Name="deleteTeamButton" Content="Удалить&#xD;&#xA;выбр. команду" HorizontalAlignment="Left" Click="DeleteTeamButton_Click" Margin="246,220,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
         
         <Label x:Name="matchesLabel" Content="Матчи" HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="updateButton2" Content="Обновить" HorizontalAlignment="Left" Click="UpdateButton_Click" Margin="120,276,0,0" VerticalAlignment="Top" Width="65" Height="18"/>
         
         <DataGrid x:Name="matchesDataGrid" MouseDoubleClick="MatchesDataGrid_MouseDoubleClick" HorizontalAlignment="Left" Height="160" Margin="10,306,0,0" VerticalAlignment="Top" Width="774">
             <DataGrid.Columns>
@@ -38,5 +40,10 @@
         <Button x:Name="openMatchDetailsButton" Content="Просмотреть&#xD;&#xA;детали матча" HorizontalAlignment="Left" Click="OpenMatchDetailsButton_Click" Margin="10,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
         <Button x:Name="createNewMatchButton" Content="Создать&#xD;&#xA;новый матч" HorizontalAlignment="Left" Click="CreateNewMatchButton_Click" Margin="128,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
         <Button x:Name="deleteMatchButton" Content="Удалить&#xD;&#xA;выбранный матч" HorizontalAlignment="Left" Click="DeleteMatchButton_Click" Margin="246,478,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+        <Button x:Name="showDefendersReport" Content="Отборы по&#xD;&#xA;защитникам" HorizontalAlignment="Left" Click="ShowDefendersReport_Click" Margin="11,564,0,0" VerticalAlignment="Top" Width="108" Height="38"/>
+
+        <TextBlock x:Name="reportsTextBlock" Text="" HorizontalAlignment="Left" Margin="10,607,0,32.5" Width="774" Height="100"/>
+        <Button x:Name="showAttackersReport" Content="Лучший нападающий" HorizontalAlignment="Left" Click="ShowAttackersReport_Click" Margin="138,564,0,0" VerticalAlignment="Top" Width="136" Height="38"/>
+        <Button x:Name="showGoalsDistributionReport" Content="Голы по ролям" HorizontalAlignment="Left" Click="ShowGoalsDistributionReport_Click" Margin="291,564,0,0" VerticalAlignment="Top" Width="136" Height="38"/>
     </Grid>
 </Window>

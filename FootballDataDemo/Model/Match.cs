@@ -55,11 +55,11 @@ namespace FootballDataDemo.Model
                 // Подсчет голов
                 foreach (Goal g in Goals)
                 {
-                    if (g.ScoringTeam.Id == Team1.Id)
+                    if (Team1 != null && g.ScoringTeam != null && g.ScoringTeam.Id == Team1.Id)
                     {
                         team1Score++;
                     }
-                    else if (g.ScoringTeam.Id == Team2.Id)
+                    else if (Team2 != null && g.ScoringTeam != null && g.ScoringTeam.Id == Team2.Id)
                     {
                         team2Score++;
                     }

@@ -1,0 +1,15 @@
+﻿<Window x:Class="FootballDataDemo.CreateNewMatchForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FootballDataDemo"
+        mc:Ignorable="d"
+        Title="CreateNewMatchForm" Height="207.517" Width="323.395">
+    <Grid>
+        <ComboBox Name="team1List" Height="30" VerticalAlignment="Top" Margin="32,28,33.5,0" SelectionChanged="Team1List_SelectionChanged"/>
+        <ComboBox Name="team2List" Height="30" VerticalAlignment="Top" Margin="32,63,33.5,0"/>
+
+        <Button x:Name="createNewMatchButton" Content="Создать матч" HorizontalAlignment="Left" Click="CreateNewMatchButton_Click" Margin="101,112,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+    </Grid>
+</Window>

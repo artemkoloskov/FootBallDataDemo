@@ -20,6 +20,12 @@ namespace FootballDataDemo.Model
         public virtual Player ScoringPlayer { get; set; }
         public virtual Player Goalkeeper { get; set; }
 
+        // Для столбцов таблиц
+        public string ScoringTeamName => ScoringTeam.Name;
+        public string ConcedingTeamName => ConcedingTeam.Name;
+        public string ScoringPlayerName => ScoringPlayer.Name;
+        public string GoalkeeperName => Goalkeeper.Name;
+
         public Goal ()
         {
 

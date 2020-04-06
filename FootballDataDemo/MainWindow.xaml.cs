@@ -29,7 +29,15 @@ namespace FootballDataDemo
         {
             InitializeComponent();
 
+            teamsDataGrid.AutoGenerateColumns = false;
+            teamsDataGrid.CanUserAddRows = false;
+
+            matchesDataGrid.AutoGenerateColumns = false;
+            matchesDataGrid.CanUserAddRows = false;
+
             Update();
+
+            Closing += MainWindow_Closing;
         }
 
         private void Update()
@@ -44,16 +52,13 @@ namespace FootballDataDemo
                 .Load();
 
             //  Заполнить таблицу команд
-            teamsDataGrid.AutoGenerateColumns = false;
-            teamsDataGrid.CanUserAddRows = false;
             teamsDataGrid.ItemsSource = db.Teams.Local.ToBindingList();
 
             // Заполнить таблицу матчей
-            matchesDataGrid.AutoGenerateColumns = false;
-            matchesDataGrid.CanUserAddRows = false;
             matchesDataGrid.ItemsSource = db.Matches.Local.ToBindingList();
 
-            Closing += MainWindow_Closing;
+            // очистить блок для отчетов
+            reportsTextBlock.Text = "";
         }
 
         /// <summary>
@@ -113,7 +118,8 @@ namespace FootballDataDemo
         /// <param name="e"></param>
         private void CreateNewMatchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateNewMatchForm createNewMatchForm = new CreateNewMatchForm();
+            createNewMatchForm.Show();
         }
 
         /// <summary>
@@ -132,11 +138,11 @@ namespace FootballDataDemo
                         db.Matches.Remove(match);
                     }
                 }
+
+                db.SaveChanges();
+
+                Update();
             }
-
-            db.SaveChanges();
-
-            Update();
         }
 
         /// <summary>
@@ -166,11 +172,11 @@ namespace FootballDataDemo
                         db.Teams.Remove(team);
                     }
                 }
+
+                db.SaveChanges();
+
+                Update();
             }
-
-            db.SaveChanges();
-
-            Update();
         }
 
         private void Page_Loaded (object sender, RoutedEventArgs e)
@@ -216,6 +222,90 @@ namespace FootballDataDemo
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Обновить данные окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        /// <summary>
+        /// Отобразить отчет по лучшему защитнику
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowDefendersReport_Click(object sender, RoutedEventArgs e)
+        {
+            var defenders = db.Players.Where(p => p.Role.RoleType == RoleType.Defender).ToList();
+
+            var tackles = db.Tackles.Include(g => g.TacklingPlayer).ToList();
+
+            string bestDefenderName = "";
+            int mostTackles = 0;
+
+            foreach (Player p in defenders)
+            {
+                int currentPlayerTackles = tackles.Where(t => t.TacklingPlayer.Id == p.Id).Count();
+
+                if (currentPlayerTackles > mostTackles)
+                {
+                    bestDefenderName = p.Name;
+                    mostTackles = currentPlayerTackles;
+                }
+            }
+
+            reportsTextBlock.Text = "Лучший защитник: " + bestDefenderName + ", " + mostTackles + " отборов.";
+        }
+
+        /// <summary>
+        /// Отобразить отчет по лучшему нападающему
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowAttackersReport_Click(object sender, RoutedEventArgs e)
+        {
+            var attackers = db.Players.Where(p => p.Role.RoleType == RoleType.Attacker).ToList();
+
+            var goals = db.Goals.Include(g => g.ScoringPlayer).ToList();
+
+            string bestAttackerName = "";
+            int mostGoals = 0;
+
+            foreach (Player p in attackers)
+            {
+                int currentPlayerGoals = goals.Where(t => t.ScoringPlayer.Id == p.Id).Count();
+
+                if (currentPlayerGoals > mostGoals)
+                {
+                    bestAttackerName = p.Name;
+                    mostGoals = currentPlayerGoals;
+                }
+            }
+
+            reportsTextBlock.Text = "Лучший нападающий: " + bestAttackerName + ", " + mostGoals + " голов.";
+        }
+
+        /// <summary>
+        /// Отобразить отчет по количеству голов забитых разными ролями
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowGoalsDistributionReport_Click(object sender, RoutedEventArgs e)
+        {
+            var goals = db.Goals.Include(g => g.ScoringPlayer).ThenInclude(p => p.Role).ToList();
+
+            string result = "";
+
+            result += "Вратари забили: " + goals.Where(g => g.ScoringPlayer.Role.RoleType == RoleType.Goalkeeper).Count() + " голов\n";
+            result += "Защитники забили: " + goals.Where(g => g.ScoringPlayer.Role.RoleType == RoleType.Defender).Count() + " голов\n";
+            result += "Нападающие забили: " + goals.Where(g => g.ScoringPlayer.Role.RoleType == RoleType.Attacker).Count() + " голов\n";
+
+            reportsTextBlock.Text = result;
         }
     }
 }

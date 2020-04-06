@@ -13,7 +13,8 @@ namespace FootballDataDemo.Model
     /// </summary>
     public enum RoleType
     {
-        Goalkeeper = 1,
+        NoRole = 0,
+        Goalkeeper,
         Defender,
         Attacker
     }
@@ -47,6 +48,9 @@ namespace FootballDataDemo.Model
                     case RoleType.Attacker:
                         title = "Нападающий";
                         return title;
+                    case RoleType.NoRole:
+                        title = "Нет роли";
+                        break;
                 }
 
                 return title;

@@ -19,6 +19,11 @@ namespace FootballDataDemo.Model
         public virtual Player PassingPlayer { get; set; }
         public virtual Player RecievingPlayer { get; set; }
 
+        // Для столбцов таблиц
+        public string PassingTeamName => PassingTeam.Name;
+        public string PassingPlayerName => PassingPlayer.Name;
+        public string RecievingPlayerName => RecievingPlayer.Name;
+
         public GoalPass ()
         {
             

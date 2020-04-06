@@ -47,8 +47,12 @@ namespace FootballDataDemo
 
             db.Teams.Local.Add(newTeam);
 
+            db.SaveChanges();
+
             TeamDataForm teamDataForm = new TeamDataForm(newTeam.Id, newTeam.LongName);
             teamDataForm.Show();
+
+            Close();
         }
     }
 }

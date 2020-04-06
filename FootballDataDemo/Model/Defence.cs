@@ -19,7 +19,13 @@ namespace FootballDataDemo.Model
         public virtual Team AttemptingTeam { get; set; }
         public virtual Player Goalkeeper { get; set; }
         public virtual Player AttemtingPlayer { get; set; }
-        
+
+        // Для столбцов таблиц
+        public string DefendingTeamName => DefendingTeam.Name;
+        public string AttemptingTeamName => AttemptingTeam.Name;
+        public string GoalkeeperName => Goalkeeper.Name;
+        public string AttemtingPlayerName => AttemtingPlayer.Name;
+
         public Defence ()
         {
 

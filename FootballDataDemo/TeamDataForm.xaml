@@ -8,8 +8,10 @@
         Title="TeamDataForm" Height="450" Width="800">
     <Grid>
         <Label x:Name="teamLabel" Content="Команда" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="createNewPlayerButton" Content="Создать игрока" HorizontalAlignment="Left" Click="CreateNewPlayerButton_Click" Margin="684,17,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
+        <Button x:Name="updateButton" Content="Обновить" HorizontalAlignment="Left" Click="UpdateButton_Click" Margin="579,17,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
 
-        <DataGrid x:Name="playersDataGrid" HorizontalAlignment="Left" Height="360" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
+        <DataGrid x:Name="playersDataGrid" HorizontalAlignment="Left" Height="329" Margin="10,49,0,0" VerticalAlignment="Top" Width="774">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Number}" Header="Номер" Width="20*"/>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}" Header="Фамилия Имя" Width="55*"/>
@@ -20,5 +22,7 @@
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding GoalPassesNum}" Header="Голевые передачи" Width="40*"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button x:Name="deletePlayerButton" Content="Удалить игрока" HorizontalAlignment="Left" Click="DeletePlayerButton_Click" Margin="10,383,0,0" VerticalAlignment="Top" Width="100" Height="24"/>
     </Grid>
 </Window>

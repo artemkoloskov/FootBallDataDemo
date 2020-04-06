@@ -1,0 +1,48 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FootballDataDemo"
+        xmlns:Model="clr-namespace:FootballDataDemo.Model" x:Class="FootballDataDemo.CreateNewPlayerForm"
+        mc:Ignorable="d"
+        Title="CreateNewPlayerForm" Height="244.003" Width="330.236" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="playerViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Player}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource playerViewSource}">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="46,28,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Фамилия Имя:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="87,65,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Номер:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="numberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+
+        <ComboBox Name="rolesList" Height="30" VerticalAlignment="Top" Margin="93,102,56,0">
+            <TextBlock>Нет роли</TextBlock>
+            <TextBlock>Вратарь</TextBlock>
+            <TextBlock>Защитник</TextBlock>
+            <TextBlock>Нападающий</TextBlock>
+        </ComboBox>
+
+        <Button x:Name="createNewPlayersButton" Content="Сохранить и&#xD;&#xA;создать еще одного" HorizontalAlignment="Left" Click="CreateNewPlayersButton_Click" Margin="24,153,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+        <Button x:Name="cancelButton" Content="Отменить" HorizontalAlignment="Left" Click="CancelButton_Click" Margin="178,153,0,0" VerticalAlignment="Top" Width="125" Height="38"/>
+
+    </Grid>
+</Window>

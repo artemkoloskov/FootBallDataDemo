@@ -24,11 +24,22 @@ namespace FootballDataDemo
     {
         private AppDbContext db;
 
+        private int teamId;
+
         public TeamDataForm(int id, string teamName)
         {
             InitializeComponent();
 
-            Update(id, teamName);
+            teamId = id;
+
+            playersDataGrid.AutoGenerateColumns = false;
+            playersDataGrid.CanUserAddRows = false;
+
+            teamLabel.Content = teamName;
+
+            Update();
+
+            Closing += MainWindow_Closing;
         }
 
         /// <summary>
@@ -36,7 +47,7 @@ namespace FootballDataDemo
         /// </summary>
         /// <param name="id"></param>
         /// <param name="teamName"></param>
-        private void Update(int id, string teamName)
+        private void Update()
         {
             db = new AppDbContext();
 
@@ -48,7 +59,7 @@ namespace FootballDataDemo
             IQueryable<Player> playersQuery = db.Players
                 .Include(p => p.Role)
                 .Include(p => p.Team)
-                .Where(p => p.Team.Id == id);
+                .Where(p => p.Team.Id == teamId);
 
             List<Player> players = playersQuery.ToList();
             
@@ -62,7 +73,7 @@ namespace FootballDataDemo
 
                 foreach (Goal g in goals.ToList())
                 {
-                    if (p.Id == g.ScoringPlayer.Id)
+                    if (g.ScoringPlayer != null && p.Id == g.ScoringPlayer.Id)
                     {
                         goalsNum++;
                     }
@@ -70,7 +81,7 @@ namespace FootballDataDemo
 
                 foreach (Defence d in defences.ToList())
                 {
-                    if (p.Id == d.Goalkeeper.Id)
+                    if (d.Goalkeeper != null && p.Id == d.Goalkeeper.Id)
                     {
                         defencesNum++;
                     }
@@ -78,7 +89,7 @@ namespace FootballDataDemo
 
                 foreach (Tackle t in tackles.ToList())
                 {
-                    if (p.Id == t.TacklingPlayer.Id)
+                    if (t.TacklingPlayer != null && p.Id == t.TacklingPlayer.Id)
                     {
                         tacklesNum++;
                     }
@@ -86,7 +97,7 @@ namespace FootballDataDemo
 
                 foreach (GoalPass g in goalPasses.ToList())
                 {
-                    if (p.Id == g.PassingPlayer.Id)
+                    if (g.PassingPlayer != null && p.Id == g.PassingPlayer.Id)
                     {
                         goalPassesNum++;
                     }
@@ -98,14 +109,8 @@ namespace FootballDataDemo
                 p.GoalPassesNum = goalPassesNum;
             }
 
-            teamLabel.Content = teamName;
-
             //  Заполнить таблицу команд
-            playersDataGrid.AutoGenerateColumns = false;
-            playersDataGrid.CanUserAddRows = false;
-            playersDataGrid.ItemsSource = players;
-
-            Closing += MainWindow_Closing;
+            playersDataGrid.ItemsSource = players;            
         }
 
         /// <summary>
@@ -116,6 +121,50 @@ namespace FootballDataDemo
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             db.Dispose();
+        }
+
+        /// <summary>
+        /// Открыть окно создания нового игрока команды
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateNewPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewPlayerForm createNewPlayerForm = new CreateNewPlayerForm(teamId);
+            createNewPlayerForm.Show();
+        }
+
+        /// <summary>
+        /// Обновить данные на форме
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        /// <summary>
+        /// Удалить выбранного игрока команды
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeletePlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (playersDataGrid.SelectedItems.Count > 0)
+            {
+                for (int i = 0; i < playersDataGrid.SelectedItems.Count; i++)
+                {
+                    if (playersDataGrid.SelectedItems[i] is Player player)
+                    {
+                        db.Players.Remove(player);
+                    }
+                }
+
+                db.SaveChanges();
+
+                Update();
+            }
         }
     }
 }
