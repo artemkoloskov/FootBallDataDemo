@@ -26,6 +26,11 @@ namespace FootballDataDemo
 
         private int teamId;
 
+        /// <summary>
+        /// Форма с деталями команды
+        /// </summary>
+        /// <param name="id">Идентификатор команды</param>
+        /// <param name="teamName">название команды</param>
         public TeamDataForm(int id, string teamName)
         {
             InitializeComponent();

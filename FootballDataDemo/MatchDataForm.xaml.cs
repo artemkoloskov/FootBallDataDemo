@@ -24,6 +24,11 @@ namespace FootballDataDemo
         private AppDbContext db;
         private int matchId;
 
+        /// <summary>
+        /// Форма с деталями матча
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="matchTitle"></param>
         public MatchDataForm(int id, string matchTitle)
         {
             matchId = id;

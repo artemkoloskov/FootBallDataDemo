@@ -26,6 +26,10 @@ namespace FootballDataDemo
 
         private int teamId;
 
+        /// <summary>
+        /// форма создания нового игрока команды
+        /// </summary>
+        /// <param name="teamId">Идентификатор команды</param>
         public CreateNewPlayerForm(int teamId)
         {
             InitializeComponent();
@@ -59,6 +63,9 @@ namespace FootballDataDemo
             db.Dispose();
         }
 
+        /// <summary>
+        /// Заполняет список ролей игрока
+        /// </summary>
         private void PopulateRoleList ()
         {
             List<string> teams = new List<string>();
@@ -71,6 +78,11 @@ namespace FootballDataDemo
             rolesList.ItemsSource = teams;
         }
 
+        /// <summary>
+        /// Создает нового игрока и очищает форму для создания еще одного
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewPlayersButton_Click(object sender, RoutedEventArgs e)
         {
             Player newPlayer = new Player
@@ -89,7 +101,7 @@ namespace FootballDataDemo
         }
 
         /// <summary>
-        /// Очищает форму для нового игрока
+        /// Очищает форму для создания нового игрока
         /// </summary>
         private void ClearForm()
         {

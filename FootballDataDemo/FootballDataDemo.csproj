@@ -197,6 +197,10 @@
     <Compile Include="CreateNewTeamForm.xaml.cs">
       <DependentUpon>CreateNewTeamForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200406222520_ver2.cs" />
+    <Compile Include="Migrations\20200406222520_ver2.designer.cs">
+      <DependentUpon>20200406222520_ver2.cs</DependentUpon>
+    </Compile>
     <Compile Include="TeamDataForm.xaml.cs">
       <DependentUpon>TeamDataForm.xaml</DependentUpon>
     </Compile>

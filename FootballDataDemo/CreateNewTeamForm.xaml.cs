@@ -24,6 +24,9 @@ namespace FootballDataDemo
     {
         private AppDbContext db;
 
+        /// <summary>
+        /// Форма создания новой команды
+        /// </summary>
         public CreateNewTeamForm()
         {
             InitializeComponent();
@@ -34,6 +37,11 @@ namespace FootballDataDemo
 
         }
 
+        /// <summary>
+        /// Сохраняет новую команду, открывает окно с деталями этой команды, закрывает форму
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewTeamButton_Click(object sender, RoutedEventArgs e)
         {
             db = new AppDbContext();
@@ -51,6 +59,8 @@ namespace FootballDataDemo
 
             TeamDataForm teamDataForm = new TeamDataForm(newTeam.Id, newTeam.LongName);
             teamDataForm.Show();
+
+            db.Dispose();
 
             Close();
         }

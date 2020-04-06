@@ -16,6 +16,10 @@ namespace FootballDataDemo
         private AppDbContext db;
         private Match match;
 
+        /// <summary>
+        /// Форма создания нового отбора матча
+        /// </summary>
+        /// <param name="id">Идентификатор матча</param>
         public CreateNewTackleForm(int id)
         {
             InitializeComponent();
@@ -27,11 +31,15 @@ namespace FootballDataDemo
                 .Include(m => m.Team2).ThenInclude(t => t.Players).ThenInclude(p => p.Role)
                 .Where(m => m.Id == id).SingleOrDefault();
 
+            // заполнить список для выбора отбирающей команды
             PopulateTacklingTeamList();
 
             Closing += MainWindow_Closing;
         }
 
+        /// <summary>
+        /// заполняет список для выбора отбирающей команды
+        /// </summary>
         private void PopulateTacklingTeamList()
         {
             List<string> teams = new List<string>
@@ -51,16 +59,24 @@ namespace FootballDataDemo
             // tackleViewSource.Source = [универсальный источник данных]
         }
 
+        /// <summary>
+        /// Запускается при выборе отбирающей команды
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TacklingTeamList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Команда, у которой отбирают - противоположная той, которая отбирает
             tackledTeamNameLabel.Content =
                 match.Team1.Name == tacklingTeamList.SelectedValue.ToString() ?
                 match.Team2.Name : match.Team1.Name;
 
+            // Заполнить выпадающие списки игроков для выбора
             PopulateTacklingPlayerList();
             PopulateTackledPlayerList();
         }
 
+        // ЗАполняет список игроков для выбора того, у кого отобрали мяч
         private void PopulateTackledPlayerList()
         {
             List<string> goalkeepres = new List<string>();
@@ -83,6 +99,9 @@ namespace FootballDataDemo
             tackledPlayerList.ItemsSource = goalkeepres;
         }
 
+        /// <summary>
+        /// Заполняет выпадающий список для выбора отбирающего мяч игрока
+        /// </summary>
         private void PopulateTacklingPlayerList()
         {
             List<string> players = new List<string>();
@@ -105,6 +124,11 @@ namespace FootballDataDemo
             tacklingPlayerList.ItemsSource = players;
         }
 
+        /// <summary>
+        /// Сохраняет новый отбор
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewTackleButton_Click(object sender, RoutedEventArgs e)
         {
             Tackle newTackle = new Tackle

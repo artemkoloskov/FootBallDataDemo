@@ -26,7 +26,7 @@ namespace FootballDataDemo
         private Match match;
 
         /// <summary>
-        /// Форма создания нового гола
+        /// Форма создания нового гола матча
         /// </summary>
         /// <param name="id">Идентификатор матча которому будет принадлежать гол</param>
         public CreateNewGoalForm(int id)
@@ -68,20 +68,25 @@ namespace FootballDataDemo
         }
 
         /// <summary>
-        /// Вызывается при выборе команды в в         
+        /// Вызывается при выборе команды в ввыпадающем списке команд      
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ScoringTeamList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Команда которой забили - противоположная той, которая забила
             concedingTeamNameLabel.Content =
                 match.Team1.Name == scoringTeamList.SelectedValue.ToString() ?
                 match.Team2.Name : match.Team1.Name;
 
+            // заполнить выпадающие списки игроков и вратарей 
             PopulateScoringPlayerList();
             PopulateGoalkeeperList();
         }
 
+        /// <summary>
+        /// Заполняет выпадающий список вратарей
+        /// </summary>
         private void PopulateGoalkeeperList()
         {
             List<string> goalkeepres = new List<string>();
@@ -104,6 +109,9 @@ namespace FootballDataDemo
             goalkeeperList.ItemsSource = goalkeepres;
         }
 
+        /// <summary>
+        /// Записывает выпадающий список игроков
+        /// </summary>
         private void PopulateScoringPlayerList()
         {
             List<string> players = new List<string>();
@@ -126,6 +134,11 @@ namespace FootballDataDemo
             scoringPlayerList.ItemsSource = players;
         }
 
+        /// <summary>
+        /// Сохраняет новый гол матча
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewGoalButton_Click(object sender, RoutedEventArgs e)
         {
             Goal newGoal = new Goal

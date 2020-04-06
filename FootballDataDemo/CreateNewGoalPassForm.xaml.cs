@@ -25,6 +25,10 @@ namespace FootballDataDemo
         private AppDbContext db;
         private Match match;
 
+        /// <summary>
+        /// форма создание новой голевой передачи матча
+        /// </summary>
+        /// <param name="id">Идентификатор матча</param>
         public CreateNewGoalPassForm(int id)
         {
             InitializeComponent();
@@ -41,6 +45,9 @@ namespace FootballDataDemo
             Closing += MainWindow_Closing;
         }
 
+        /// <summary>
+        /// Заполнить выпадающий список команды
+        /// </summary>
         private void PopulateTeamList()
         {
             List<string> teams = new List<string>
@@ -52,11 +59,20 @@ namespace FootballDataDemo
             teamList.ItemsSource = teams;
         }
 
+        /// <summary>
+        /// запускается при выборе команды в выпадающем списке команд
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TeamList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Заполнить список игроков для пасующего
             PopulatePassingPlayerList();
         }
 
+        /// <summary>
+        /// заполняет выпадающий список для выбора пасующего
+        /// </summary>
         private void PopulatePassingPlayerList()
         {
             List<string> players = new List<string>();
@@ -79,11 +95,19 @@ namespace FootballDataDemo
             passingPlayerList.ItemsSource = players;
         }
 
+        /// <summary>
+        /// запускается при выборе пасующего
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PassingPlayerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PopulateRecievingPlayerList();
         }
 
+        /// <summary>
+        /// заполняет список игроков для выбора принимающего
+        /// </summary>
         private void PopulateRecievingPlayerList()
         {
             List<string> receivingPlayers = new List<string>();
@@ -92,6 +116,7 @@ namespace FootballDataDemo
             {
                 foreach (Player p in match.Team1.Players)
                 {
+                    // игрок добавляется в список, если он не выбран в качестве пасующего
                     if (p.Name != passingPlayerList.SelectedValue.ToString())
                     {
                         receivingPlayers.Add(p.Name);
@@ -102,6 +127,7 @@ namespace FootballDataDemo
             {
                 foreach (Player p in match.Team2.Players)
                 {
+                    // игрок добавляется в список, если он не выбран в качестве пасующего
                     if (p.Name != passingPlayerList.SelectedValue.ToString())
                     {
                         receivingPlayers.Add(p.Name);
@@ -120,6 +146,11 @@ namespace FootballDataDemo
             // goalPassViewSource.Source = [универсальный источник данных]
         }
 
+        /// <summary>
+        /// Сохраняет новую голевую передачу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewGoalPassButton_Click(object sender, RoutedEventArgs e)
         {
             GoalPass newGoalPass = new GoalPass

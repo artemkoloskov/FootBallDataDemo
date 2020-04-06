@@ -33,12 +33,16 @@ namespace FootballDataDemo
             Closing += MainWindow_Closing;
         }
 
+        /// <summary>
+        /// Сбрасывает форму
+        /// </summary>
         private void Update()
         {
             db = new AppDbContext();
 
             db.Matches.Load();
 
+            // заполняет список команд учатсниц
             PopulateTeam1List();
 
             team2List.Visibility = Visibility.Hidden;
@@ -68,6 +72,7 @@ namespace FootballDataDemo
 
             foreach (Team team in db.Teams.ToList())
             {
+                // команда добавлется, если не выбрана в качестве первой команды
                 if (team.Name != team1List.SelectedValue.ToString())
                 {
                     teams.Add(team.Name);
@@ -77,7 +82,11 @@ namespace FootballDataDemo
             team2List.ItemsSource = teams;
         }
 
-
+        /// <summary>
+        /// запускается при выборе первой команды из списка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Team1List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PopulateTeam2List();
@@ -85,6 +94,11 @@ namespace FootballDataDemo
             team2List.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Создает новый матч
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewMatchButton_Click(object sender, RoutedEventArgs e)
         {
             Match match = new Match
@@ -96,8 +110,6 @@ namespace FootballDataDemo
             db.Matches.Local.Add(match);
 
             db.SaveChanges();
-
-            Update();
 
             MatchDataForm matchDataForm = new MatchDataForm(match.Id, match.TitleLong);
             matchDataForm.Show();
